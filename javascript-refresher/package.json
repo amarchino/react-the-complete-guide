@@ -1,0 +1,22 @@
+{
+    "name": "javascript-refresher",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+        "start": "parcel index.html --open",
+        "build": "parcel build index.html"
+    },
+    "dependencies": {
+        "parcel": "^2.4.14"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.26.10",
+        "typescript": "^5.8.3"
+    },
+    "resolutions": {
+        "@babel/preset-env": "7.26.9"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}
