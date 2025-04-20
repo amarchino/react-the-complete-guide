@@ -55,3 +55,5 @@ sketch
 
 dist/
 .parcel-cache/
+/.react-router/
+/build/
