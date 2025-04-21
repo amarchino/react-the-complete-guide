@@ -6,7 +6,7 @@ import { CORE_CONCEPTS, EXAMPLES } from './data';
 import Example from './components/Example';
 
 function App() {
-  const [ selectedTopic, setSelectedTopic ] = useState('Please click a button');
+  const [ selectedTopic, setSelectedTopic ] = useState();
 
   function handleClick(selectedButton) {
     setSelectedTopic(selectedButton);
@@ -33,7 +33,7 @@ function App() {
             <TabButton onClick={() => handleClick('props')}>Props</TabButton>
             <TabButton onClick={() => handleClick('state')}>State</TabButton>
           </menu>
-          <Example { ...EXAMPLES[selectedTopic] } />
+          { !selectedTopic ? <p>Please select a topic</p> : <Example { ...EXAMPLES[selectedTopic] } /> }
         </section>
       </main>
     </div>
