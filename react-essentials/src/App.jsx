@@ -13,7 +13,7 @@ function App() {
   }
 
   return (
-    <div>
+    <>
       <Header />
       <main>
         <section id="core-concepts">
@@ -30,7 +30,7 @@ function App() {
           { !selectedTopic ? <p>Please select a topic</p> : <Example { ...EXAMPLES[selectedTopic] } /> }
         </section>
       </main>
-    </div>
+    </>
   );
 }
 
