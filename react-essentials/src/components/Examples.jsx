@@ -15,7 +15,7 @@ export default function Examples() {
 
   return (
     <Section id="examples" title="Examples">
-      <Tabs buttons={ CORE_CONCEPTS.map(el => <TabButton key={el.title} isSelected={selectedTopic === el.title.toLowerCase()} onClick={() => handleClick(el.title.toLowerCase())}>{ el.title }</TabButton>) }>
+      <Tabs ButtonsContainer="menu" buttons={ CORE_CONCEPTS.map(el => <TabButton key={el.title} isSelected={selectedTopic === el.title.toLowerCase()} onClick={() => handleClick(el.title.toLowerCase())}>{ el.title }</TabButton>) }>
         { tabContent }
       </Tabs>
     </Section>
