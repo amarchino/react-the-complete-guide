@@ -12,7 +12,7 @@ function App() {
     duration: 10
   });
   function handleChange(inputIdentifier, newValue) {
-    setUserInput(currentState => ({ ...currentState, [inputIdentifier]: newValue }));
+    setUserInput(currentState => ({ ...currentState, [inputIdentifier]: +newValue }));
   }
 
   return (
