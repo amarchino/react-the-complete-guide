@@ -28,7 +28,7 @@ function App() {
   const activePlayer = getCurrentPlayer(gameTurns);
 
   const gameBoard = computeGameBoard(gameTurns);
-  const winner = getWinner(gameBoard);
+  const winner = getWinner(gameBoard, players);
   const hasDraw = gameTurns.length === 9 && !winner;
 
   function handleSelectSquare(rowIndex, colIndex) {
@@ -48,8 +48,8 @@ function App() {
     <main>
       <div id="game-container">
         <ol id="players" className='highlight-player'>
-          <Player initialName="Player 1" symbol="X" isActive={ activePlayer === 'X' } />
-          <Player initialName="Player 2" symbol="O" isActive={ activePlayer === 'O' } />
+          <Player initialName="Player 1" symbol="X" isActive={ activePlayer === 'X' } onChangeName={ handlePlayersNameChange } />
+          <Player initialName="Player 2" symbol="O" isActive={ activePlayer === 'O' } onChangeName={ handlePlayersNameChange } />
         </ol>
         { ( winner || hasDraw ) && <GameOver winner={ winner } onRestart={ handleRestart } /> }
         <GameBoard onSelectSquare={ handleSelectSquare } board={ gameBoard } />
