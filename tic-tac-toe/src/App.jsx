@@ -5,7 +5,8 @@ import Log from './components/Log';
 import GameOver from './components/GameOver';
 import { getWinner } from './winning-combinations';
 
-const initialGameBoard = [
+const PLAYERS = { 'X': 'Player 1', 'O': 'Player 2'};
+const INITIAL_GAME_BOARD = [
   [ null, null, null ],
   [ null, null, null ],
   [ null, null, null ]
@@ -14,7 +15,7 @@ function getCurrentPlayer(turns) {
   return turns[0]?.player === 'X' ? 'O' : 'X';
 }
 function computeGameBoard(gameTurns) {
-  const gameBoard = [ ...initialGameBoard.map(row => [ ...row ]) ];
+  const gameBoard = [ ...INITIAL_GAME_BOARD.map(row => [ ...row ]) ];
   for(const { square: { row, col }, player } of gameTurns) {
     gameBoard[row][col] = player;
   }
@@ -23,7 +24,7 @@ function computeGameBoard(gameTurns) {
 
 
 function App() {
-  const [ players, setPlayers ] = useState({ 'X': 'Player 1', 'O': 'Player 2'});
+  const [ players, setPlayers ] = useState(PLAYERS);
   const [ gameTurns, setGameTurns ] = useState([]);
   const activePlayer = getCurrentPlayer(gameTurns);
 
@@ -48,8 +49,8 @@ function App() {
     <main>
       <div id="game-container">
         <ol id="players" className='highlight-player'>
-          <Player initialName="Player 1" symbol="X" isActive={ activePlayer === 'X' } onChangeName={ handlePlayersNameChange } />
-          <Player initialName="Player 2" symbol="O" isActive={ activePlayer === 'O' } onChangeName={ handlePlayersNameChange } />
+          <Player initialName={ PLAYERS.X } symbol="X" isActive={ activePlayer === 'X' } onChangeName={ handlePlayersNameChange } />
+          <Player initialName={ PLAYERS.O } symbol="O" isActive={ activePlayer === 'O' } onChangeName={ handlePlayersNameChange } />
         </ol>
         { ( winner || hasDraw ) && <GameOver winner={ winner } onRestart={ handleRestart } /> }
         <GameBoard onSelectSquare={ handleSelectSquare } board={ gameBoard } />
