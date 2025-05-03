@@ -11,7 +11,7 @@ export default function Input({ label, invalid, ...props }) {
   }
   return (
     <>
-      <label className={labelClasses}> { label }</label>
+      <label className={labelClasses}>{ label }</label>
       <input className={inputClasses} {...props} />
     </>
   );
