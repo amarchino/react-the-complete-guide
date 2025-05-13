@@ -13,6 +13,11 @@ export default class Users extends Component {
     toggleUsersHandler() {
         this.setState(currState => ({ showUsers: !currState.showUsers }));
     }
+    componentDidUpdate() {
+        if(this.props.users.length === 0) {
+            throw new Error('No users provided!');
+        }
+    }
     render() {
         const usersList = (
           <ul>
