@@ -8,20 +8,16 @@ import AvailablePlaces from './components/AvailablePlaces.jsx';
 
 import { fetchUserPlaces, updateUserPlaces } from './http.js';
 import ErrorPage from './components/ErrorPage.jsx';
-import { useFetch } from './hooks/useFetch.js'
+import { useFetch } from './hooks/useFetch.js';
 
 function App() {
   const selectedPlace = useRef();
 
-  const [userPlaces, setUserPlaces] = useState([]);
   const [errorUpdatingPlaces, setErrorUpdatingPlaces] = useState();
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const [ isFetching, setIsFetching ] = useState(false);
-  const [ error, setError ] = useState(null);
-
-  useFetch();
+  const { isFetching, error, fetchedData } = useFetch(fetchUserPlaces, []);
 
   function handleStartRemovePlace(place) {
     setModalIsOpen(true);
@@ -33,36 +29,36 @@ function App() {
   }
 
   async function handleSelectPlace(selectedPlace) {
-    setUserPlaces((prevPickedPlaces) => {
-      if (!prevPickedPlaces) {
-        prevPickedPlaces = [];
-      }
-      if (prevPickedPlaces.some((place) => place.id === selectedPlace.id)) {
-        return prevPickedPlaces;
-      }
-      return [selectedPlace, ...prevPickedPlaces];
-    });
-    try {
-      await updateUserPlaces([selectedPlace, ...userPlaces])
-    } catch(error) {
-      setUserPlaces(userPlaces);
-      setErrorUpdatingPlaces({ message: error.message || 'Failed to update places.'});
-    }
+    // setUserPlaces((prevPickedPlaces) => {
+    //   if (!prevPickedPlaces) {
+    //     prevPickedPlaces = [];
+    //   }
+    //   if (prevPickedPlaces.some((place) => place.id === selectedPlace.id)) {
+    //     return prevPickedPlaces;
+    //   }
+    //   return [selectedPlace, ...prevPickedPlaces];
+    // });
+    // try {
+    //   await updateUserPlaces([selectedPlace, ...userPlaces])
+    // } catch(error) {
+    //   setUserPlaces(userPlaces);
+    //   setErrorUpdatingPlaces({ message: error.message || 'Failed to update places.'});
+    // }
   }
 
   const handleRemovePlace = useCallback(async function handleRemovePlace() {
-    setUserPlaces((prevPickedPlaces) =>
-      prevPickedPlaces.filter((place) => place.id !== selectedPlace.current.id)
-    );
-    try {
-      await updateUserPlaces(userPlaces.filter((place) => place.id !== selectedPlace.current.id));
-    } catch(error) {
-      setUserPlaces(userPlaces);
-      setErrorUpdatingPlaces({ message: error.message || 'Failed to remove places.' });
-    }
+    // setUserPlaces((prevPickedPlaces) =>
+    //   prevPickedPlaces.filter((place) => place.id !== selectedPlace.current.id)
+    // );
+    // try {
+    //   await updateUserPlaces(userPlaces.filter((place) => place.id !== selectedPlace.current.id));
+    // } catch(error) {
+    //   setUserPlaces(userPlaces);
+    //   setErrorUpdatingPlaces({ message: error.message || 'Failed to remove places.' });
+    // }
 
-    setModalIsOpen(false);
-  }, [ userPlaces ]);
+    // setModalIsOpen(false);
+  }, [ fetchedData ]);
 
   function handleError() {
     setErrorUpdatingPlaces(null);
@@ -96,7 +92,7 @@ function App() {
             fallbackText="Select the places you would like to visit below."
             isLoading={isFetching}
             loadingText="Fetching your places..."
-            places={userPlaces}
+            places={fetchedData}
             onSelectPlace={handleStartRemovePlace}
           />
         }
