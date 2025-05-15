@@ -48,9 +48,15 @@ function App() {
     setUserPlaces((prevPickedPlaces) =>
       prevPickedPlaces.filter((place) => place.id !== selectedPlace.current.id)
     );
+    try {
+      await updateUserPlaces(userPlaces.filter((place) => place.id !== selectedPlace.current.id));
+    } catch(e) {
+      setUserPlaces(userPlaces);
+      setErrorUpdatingPlaces({ message: error.message || 'Failed to remove places.' });
+    }
 
     setModalIsOpen(false);
-  }, []);
+  }, [ userPlaces ]);
 
   function handleError() {
     setErrorUpdatingPlaces(null);
