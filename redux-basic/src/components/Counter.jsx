@@ -4,7 +4,6 @@ import { counterActions } from '../store';
 
 const Counter = () => {
   const counter = useSelector(state => state.counter);
-  const showCounter = useSelector(state => state.showCounter);
   const dispatch = useDispatch();
 
   const incrementHandler = () => dispatch( counterActions.increment() );
@@ -16,7 +15,7 @@ const Counter = () => {
   return (
     <main className={classes.counter}>
       <h1>Redux Counter</h1>
-      { showCounter && <div className={classes.value}>{ counter }</div> }
+      { counter.showCounter && <div className={classes.value}>{ counter.counter }</div> }
       <div >
         <button onClick={ incrementHandler }>Increment</button>
         <button onClick={ increaseHandler }>Increase by 5</button>
