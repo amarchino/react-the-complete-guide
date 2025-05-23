@@ -10,7 +10,10 @@ export const sendCartData = cart => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(cart)
+        body: JSON.stringify({
+          items: cart.items,
+          totalQuantity: cart.totalQuantity
+        })
       });
       if(!response.ok) {
         throw new Error('Sending cart data failed.')
@@ -30,7 +33,10 @@ export const fetchCartData = () => {
         throw new Error('Could not fetch cart data!');
       }
       const cartData = await response.json();
-      dispatch(cartActions.replaceCart(cartData));
+      dispatch(cartActions.replaceCart({
+        items: cartData?.items ?? [],
+        totalQuantity: cartData?.totalQuantity ?? []
+      }));
     } catch(e) {
       dispatch( uiActions.showNotification({ status: 'error', title: 'Error!', message: error.message || 'Fetching cart data failed!' }) )
     }
