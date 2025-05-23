@@ -28,6 +28,10 @@ const cartSlice = createSlice({
         existingItem.totalPrice -= existingItem.price;
       }
       state.totalQuantity--;
+    },
+    replaceCart(state, action) {
+      state.totalQuantity = action.payload.totalQuantity;
+      state.items = action.payload.items;
     }
   }
 });
