@@ -12,7 +12,7 @@ export default function ProductsPage() {
     <h1>The Products Page</h1>
     <ul>
       { PRODUCTS.map(p => <li key={p.id}>
-        <Link to={`/products/${p.id}`}>{ p.title }</Link>
+        <Link to={p.id}>{ p.title }</Link>
       </li>)  }
     </ul>
   </>
