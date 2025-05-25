@@ -5,7 +5,7 @@ export default function EventsPage() {
   const fetchedEvents = useLoaderData();
 
   return (
-    <EventsList events={fetchedEvents} />
+    <EventsList events={fetchedEvents.events} />
   );
 }
 
@@ -14,7 +14,6 @@ export async function loader() {
   if (!response.ok) {
     // ...
   } else {
-    const resData = await response.json();
-    return resData.events;
+    return response;
   }
 }
