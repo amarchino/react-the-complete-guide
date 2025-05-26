@@ -3,7 +3,7 @@ import { Form } from 'react-router-dom';
 
 import classes from './AuthForm.module.css';
 
-function AuthForm() {
+export default function AuthForm() {
   const [isLogin, setIsLogin] = useState(true);
 
   function switchAuthHandler() {
@@ -23,14 +23,10 @@ function AuthForm() {
           <input id="password" type="password" name="password" required />
         </p>
         <div className={classes.actions}>
-          <button onClick={switchAuthHandler} type="button">
-            {isLogin ? 'Create new user' : 'Login'}
-          </button>
+          <button onClick={switchAuthHandler} type="button">{isLogin ? 'Create new user' : 'Login'}</button>
           <button>Save</button>
         </div>
       </Form>
     </>
   );
 }
-
-export default AuthForm;
