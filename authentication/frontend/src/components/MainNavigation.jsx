@@ -18,7 +18,7 @@ export default function MainNavigation() {
             <NavLink to="/newsletter" className={({ isActive }) => isActive ? classes.active : undefined}>Newsletter</NavLink>
           </li>
           <li>
-            <NavLink to="/auth" className={({ isActive }) => isActive ? classes.active : undefined}>Auth</NavLink>
+            <NavLink to="/auth?mode=login" className={({ isActive }) => isActive ? classes.active : undefined}>Auth</NavLink>
           </li>
         </ul>
       </nav>
