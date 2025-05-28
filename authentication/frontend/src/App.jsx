@@ -12,9 +12,10 @@ import { action as manipulateEventAction } from './components/EventForm';
 import NewsletterPage, { action as newsletterAction } from './pages/NewsletterPage';
 import AuthenticationPage, { action as authAction } from './pages/AuthenticationPage';
 import { action as logoutAction } from './pages/LogoutPage';
+import { tokenLoader } from './util/auth';
 
 const router = createBrowserRouter([
-  { path: '/', element: <RootLayout />, errorElement: <ErrorPage />, children: [
+  { path: '/', element: <RootLayout />, errorElement: <ErrorPage />, id: 'root', loader: tokenLoader, children: [
     { index: true, element: <HomePage /> },
     { path: 'events', element: <EventsRootLayout />, children: [
       { index: true, element: <EventsPage />, loader: eventsLoader },
