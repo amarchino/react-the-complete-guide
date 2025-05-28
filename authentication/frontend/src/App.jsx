@@ -12,7 +12,7 @@ import { action as manipulateEventAction } from './components/EventForm';
 import NewsletterPage, { action as newsletterAction } from './pages/NewsletterPage';
 import AuthenticationPage, { action as authAction } from './pages/AuthenticationPage';
 import { action as logoutAction } from './pages/LogoutPage';
-import { tokenLoader } from './util/auth';
+import { checkAuthToken, tokenLoader } from './util/auth';
 
 const router = createBrowserRouter([
   { path: '/', element: <RootLayout />, errorElement: <ErrorPage />, id: 'root', loader: tokenLoader, children: [
@@ -21,9 +21,9 @@ const router = createBrowserRouter([
       { index: true, element: <EventsPage />, loader: eventsLoader },
       { path: ':eventId', id: 'event-detail', loader: eventDetailLoader, children: [
         { index: true, element: <EventDetailPage />, action: deleteEventAction },
-        { path: 'edit', element: <EditEventPage />, action: manipulateEventAction },
+        { path: 'edit', element: <EditEventPage />, action: manipulateEventAction, loader: checkAuthToken },
       ]},
-      { path: 'new', element: <NewEventPage />, action: manipulateEventAction, }
+      { path: 'new', element: <NewEventPage />, action: manipulateEventAction, loader: checkAuthToken }
     ]},
     { path: 'newsletter', element: <NewsletterPage />, action: newsletterAction },
     { path: 'auth', element: <AuthenticationPage />, action: authAction  },
