@@ -57,3 +57,11 @@ dist/
 .parcel-cache/
 /.react-router/
 /build/
+
+firebase-debug.log*
+firebase-debug.*.log*
+
+# Firebase cache
+.firebase/
+.firebaserc
+firebase.json
