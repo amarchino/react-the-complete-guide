@@ -25,6 +25,9 @@ export default function EditEvent() {
     },
     onError: (error, data, context) => {
       queryClient.setQueryData([ 'events', params.id ], context.previousEvent );
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries([ 'events', params.id ]);
     }
   });
 
