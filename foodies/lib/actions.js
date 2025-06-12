@@ -10,7 +10,7 @@ function isInvalidFile(file) {
   return !file || file.size === 0;
 }
 
-export async function shareMeal(formData) {
+export async function shareMeal(prevState, formData) {
   const meal = {
     title: formData.get('title')?.trim() || '',
     summary: formData.get('summary')?.trim() || '',
@@ -28,7 +28,9 @@ export async function shareMeal(formData) {
       || meal.creator_email === ''
       || isInvalidEmail(meal.creator_email)
       || isInvalidFile(meal.image)) {
-    throw new Error('Invalid input');
+    return {
+      message: 'Invalid input.'
+    };
   }
   await saveMeal(meal);
   redirect('/meals');
