@@ -2,8 +2,6 @@ import Link from 'next/link';
 import classes from './MainNavigation.module.css';
 
 export default function MainNavigation() {
-  console.log(Link);
-
   return (
     <header className={classes.header}>
       <div className={classes.logo}>React Meetups</div>
