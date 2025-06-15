@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     const data = req.body;
 
     const client = await MongoClient.connect('mongodb://nextjs-meetup:mypass@localhost:27017/nextjs-meetup?authSource=nextjs-meetup')
-    const db = client.db('/nextjs-meetup');
+    const db = client.db('nextjs-meetup');
 
     const meetupsCollection = db.collection('meetups');
     const result = await meetupsCollection.insertOne(data);
