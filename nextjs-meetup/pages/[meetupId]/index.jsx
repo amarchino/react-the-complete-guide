@@ -1,3 +1,4 @@
+import { MongoClient, ObjectId } from 'mongodb';
 import MeetupDetail from '../../components/meetups/MeetupDetail';
 
 export default function MeetupDetailPage({ meetupData }) {
@@ -11,26 +12,35 @@ export default function MeetupDetailPage({ meetupData }) {
 }
 
 export async function getStaticPaths() {
+  const client = await MongoClient.connect('mongodb://nextjs-meetup:mypass@localhost:27017/nextjs-meetup?authSource=nextjs-meetup')
+  const db = client.db('nextjs-meetup');
+  const meetupsCollection = db.collection('meetups');
+  const meetups = await meetupsCollection.find({}, { _id: 1 }).toArray();
+  client.close();
+
   return {
-    paths: [
-      { params: { meetupId: 'm1' } },
-      { params: { meetupId: 'm2' } },
-    ],
+    paths: meetups.map(m => ({ params: { meetupId: m._id.toString() }})),
     fallback: false
   }
 }
 
 export async function getStaticProps({ params }) {
-  // Fetch data for a single meetup
   const { meetupId } = params;
+
+  const client = await MongoClient.connect('mongodb://nextjs-meetup:mypass@localhost:27017/nextjs-meetup?authSource=nextjs-meetup')
+  const db = client.db('nextjs-meetup');
+  const meetupsCollection = db.collection('meetups');
+  const meetupData = await meetupsCollection.findOne({ _id: ObjectId.createFromHexString(meetupId) });
+  client.close();
+
   return {
     props: {
       meetupData: {
-        image: 'https://upload.wikimedia.org/wikipedia/commons/d/d3/Stadtbild_M%C3%BCnchen.jpg',
-        id: 'm1',
-        title: '"A First Meetup',
-        description: 'This is a first meetup',
-        address: 'Some address 5, 12345 Some City'
+        id: meetupData._id.toString(),
+        title: meetupData.title,
+        image: meetupData.image,
+        address: meetupData.address,
+        description: meetupData.description
       }
     }
   }
