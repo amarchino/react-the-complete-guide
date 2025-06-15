@@ -9,11 +9,10 @@ export default function HomePage({ meetups }) {
   return <MeetupList meetups={meetups} />;
 }
 
-export async function getStaticProps() {
-  // Fetch data from an API
+export async function getServerSideProps() {
   return {
     props: {
       meetups: DUMMY_MEETUPS
     }
-  };
+  }
 }
