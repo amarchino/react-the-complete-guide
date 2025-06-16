@@ -1,11 +1,15 @@
 import ClientDemo from '@/components/ClientDemo';
+import DataFetchingDemo from '@/components/DataFetchingDemo';
 import RSCDemo from '@/components/RCSDemo';
+import ServerActionsDemo from '@/components/ServerActionsDemo';
 
 export default function Home() {
   return (
     <main>
       <RSCDemo />
       <ClientDemo />
+      <DataFetchingDemo />
+      <ServerActionsDemo />
     </main>
   );
 }
