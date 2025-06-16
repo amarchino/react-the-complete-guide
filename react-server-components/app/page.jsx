@@ -6,11 +6,16 @@ import RSCDemo from '@/components/RCSDemo';
 import ServerActionsDemo from '@/components/ServerActionsDemo';
 import UsePromiseDemo from '@/components/UsePromisesDemo';
 import { Suspense } from 'react';
+import ErrorBoundary from '@/components/ErrorBoundary';
 
 export default async function Home() {
-  const fetchUsersPromise = new Promise(resolve => setTimeout(async () => {
+  const fetchUsersPromise = new Promise((resolve, reject) => setTimeout(async () => {
     const data = await fs.readFile('dummy-db.json', 'utf-8');
-    resolve(JSON.parse(data));
+    if(Math.random() > 0.5) {
+      resolve(JSON.parse(data));
+    } else {
+      reject(new Error('Error!'));
+    }
   }, 2000));
 
   return (
@@ -19,9 +24,11 @@ export default async function Home() {
       <ClientDemo />
       <DataFetchingDemo />
       <ServerActionsDemo />
-      <Suspense fallback={<p>Loading users...</p>}>
-        <UsePromiseDemo fetchUsersPromise={fetchUsersPromise} />
-      </Suspense>
+      <ErrorBoundary fallback={<p>Something went wrong</p>}>
+        <Suspense fallback={<p>Loading users...</p>}>
+          <UsePromiseDemo fetchUsersPromise={fetchUsersPromise} />
+        </Suspense>
+      </ErrorBoundary>
     </main>
   );
 }
