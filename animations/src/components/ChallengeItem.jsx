@@ -25,9 +25,7 @@ export default function ChallengeItem({ challenge, onViewDetails, isExpanded, })
             <h2>{challenge.title}</h2>
             <p>Complete until {formattedDate}</p>
             <p className="challenge-item-actions">
-              <button onClick={handleCancel} className="btn-negative">
-                Mark as failed
-              </button>
+              <button onClick={handleCancel} className="btn-negative">Mark as failed</button>
               <button onClick={handleComplete}>Mark as completed</button>
             </p>
           </div>
