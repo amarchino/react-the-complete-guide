@@ -1,24 +1,30 @@
 import { Link } from 'react-router-dom';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 import cityImg from '../assets/city.jpg';
 import heroImg from '../assets/hero.png';
 
 export default function WelcomePage() {
+  const { scrollY } = useScroll();
+
+  const yCity = useTransform(scrollY, [0, 200], [0, -100]);
+  const opacityCity = useTransform(scrollY, [0, 200, 300, 500], [1, 0.5, 0.5, 0]);
+
+  const yHero = useTransform(scrollY, [0, 200], [0, -150]);
+  const opacityHero = useTransform(scrollY, [0, 300, 500], [1, 1, 0]);
+
+  const scaleText = useTransform(scrollY, [0, 300], [1, 1.5]);
+  const yText = useTransform(scrollY, [0, 200, 300, 500], [0, 50, 50, 250]);
+
   return (
     <>
       <header id="welcome-header">
-        <div id="welcome-header-content">
+        <motion.div id="welcome-header-content" style={{ scale: scaleText, y: yText }}>
           <h1>Ready for a challenge?</h1>
-          <Link id="cta-link" to="/challenges">
-            Get Started
-          </Link>
-        </div>
-        <img
-          src={cityImg}
-          alt="A city skyline touched by sunlight"
-          id="city-image"
-        />
-        <img src={heroImg} alt="A superhero wearing a cape" id="hero-image" />
+          <Link id="cta-link" to="/challenges">Get Started</Link>
+        </motion.div>
+        <motion.img src={cityImg} alt="A city skyline touched by sunlight" id="city-image" style={{ opacity: opacityCity, y: yCity }} />
+        <motion.img src={heroImg} alt="A superhero wearing a cape" id="hero-image" style={{ opacity: opacityHero, y: yHero }} />
       </header>
       <main id="welcome-content">
         <section>
@@ -43,23 +49,14 @@ export default function WelcomePage() {
           <h2>Features</h2>
           <ul>
             <li>Custom challenge creation: Set the rules, define your pace.</li>
-            <li>
-              Track your progress: See your growth over time with our analytics
-              tools.
-            </li>
-            <li>
-              Community Support: Join our community and get motivated by peers.
-            </li>
+            <li>Track your progress: See your growth over time with our analytics tools.</li>
+            <li>Community Support: Join our community and get motivated by peers.</li>
           </ul>
         </section>
 
         <section>
           <h2>Join Thousands Embracing The Challenge</h2>
-          <p>
-            “I never realized what I was capable of until I set my first
-            challenge here. It&apos;s been a transformative experience!” - Alex
-            P.
-          </p>
+          <p>“I never realized what I was capable of until I set my first challenge here. It&apos;s been a transformative experience!” - Alex P.</p>
           {/* You can add more testimonials or even a carousel for multiple testimonials */}
         </section>
       </main>
