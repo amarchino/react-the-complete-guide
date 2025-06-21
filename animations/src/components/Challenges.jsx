@@ -6,8 +6,8 @@ import ChallengeTabs from './ChallengeTabs.jsx';
 
 export default function Challenges() {
   const { challenges } = useContext(ChallengesContext);
-  const [selectedType, setSelectedType] = useState('active');
-  const [expanded, setExpanded] = useState(null);
+  const [ selectedType, setSelectedType ] = useState('active');
+  const [ expanded, setExpanded ] = useState(null);
 
   function handleSelectType(newType) {
     setSelectedType(newType);
@@ -36,10 +36,9 @@ export default function Challenges() {
   return (
     <div id="challenges">
       <ChallengeTabs
-        challenges={filteredChallenges}
-        onSelectType={handleSelectType}
-        selectedType={selectedType}
-      >
+          challenges={filteredChallenges}
+          onSelectType={handleSelectType}
+          selectedType={selectedType}>
         {displayedChallenges.length > 0 && (
           <ol className="challenge-items">
             {displayedChallenges.map((challenge) => (
