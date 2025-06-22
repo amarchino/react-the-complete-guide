@@ -1,7 +1,8 @@
 import { createContext, useState } from 'react';
 
 export const ProductsContext = createContext({
-  products: []
+  products: [],
+  toggleFavorite: id => {}
 });
 
 export default function ProductsContextProvider({ children }) {
@@ -31,8 +32,16 @@ export default function ProductsContextProvider({ children }) {
       isFavorite: false
     }
   ]);
+  function toggleFavorite(id) {
+    setProductsList(currentProductList => {
+      return currentProductList.map(el => ({
+        ...el,
+        isFavorite: el.id === id ? !el.isFavorite : el.isFavorite
+      }))
+    });
+  }
   return (
-    <ProductsContext value={{ products: productsList }}>
+    <ProductsContext value={{ products: productsList, toggleFavorite }}>
       { children }
     </ProductsContext>
   );

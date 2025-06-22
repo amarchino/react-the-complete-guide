@@ -1,10 +1,13 @@
+import { useContext } from 'react';
 import Card from '../UI/Card';
 import classes from './ProductItem.module.css';
+import { ProductsContext } from '../../context/products-context';
 
 export default function ProductItem({ id, isFav, title, description }) {
+  const { toggleFavorite } = useContext(ProductsContext);
 
   const toggleFavHandler = () => {
-    // dispatch(toggleFav(id));
+    toggleFavorite(id);
   };
 
   return (
