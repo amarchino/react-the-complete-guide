@@ -1,14 +1,10 @@
-import { useDispatch } from 'react-redux';
-
 import Card from '../UI/Card';
 import classes from './ProductItem.module.css';
-import { toggleFav } from '../../store/actions/products';
 
 export default function ProductItem({ id, isFav, title, description }) {
-  const dispatch = useDispatch();
 
   const toggleFavHandler = () => {
-    dispatch(toggleFav(id));
+    // dispatch(toggleFav(id));
   };
 
   return (
