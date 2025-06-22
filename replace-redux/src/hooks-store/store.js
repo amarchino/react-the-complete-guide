@@ -7,10 +7,10 @@ let actions = {};
 export default function useStore() {
   const [ _, setState ] = useState(globalState);
 
-  function dispatch(actionIdentifier) {
+  function dispatch(actionIdentifier, payload) {
     const newState = actions[actionIdentifier]?.(globalState);
     globalState = { ...globalState, ...newState };
-    listeners.forEach(li => li(globalState));
+    listeners.forEach(li => li(globalState, payload));
   }
 
   useEffect(() => {
