@@ -8,15 +8,15 @@ export default function useStore() {
   const [ _, setState ] = useState(globalState);
 
   function dispatch(actionIdentifier, payload) {
-    const newState = actions[actionIdentifier]?.(globalState);
+    const newState = actions[actionIdentifier]?.(globalState, payload);
     globalState = { ...globalState, ...newState };
-    listeners.forEach(li => li(globalState, payload));
+    listeners.forEach(li => li(globalState));
   }
 
   useEffect(() => {
     listeners.push(setState);
     return () => {
-      listeners = listeners.filte(li => li !== setState);
+      listeners = listeners.filter(li => li !== setState);
     }
   }, [ setState ]);
 

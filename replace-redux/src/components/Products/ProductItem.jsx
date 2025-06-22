@@ -1,19 +1,19 @@
-import { useContext } from 'react';
 import Card from '../UI/Card';
 import classes from './ProductItem.module.css';
-import { ProductsContext } from '../../context/products-context';
+import useStore from '../../hooks-store/store';
 
 export default function ProductItem({ id, isFav, title, description }) {
-  const { toggleFavorite } = useContext(ProductsContext);
+  const [ _, dispatch ] = useStore();
 
   const toggleFavHandler = () => {
-    toggleFavorite(id);
+    dispatch('TOGGLE_FAV', id);
   };
+  console.log(title, isFav)
 
   return (
     <Card style={{ marginBottom: '1rem' }}>
       <div className={classes.productItem}>
-        <h2 className={isFav ? 'is-fav' : ''}>{title}</h2>
+        <h2 className={isFav ? classes.isFav : undefined}>{title}</h2>
         <p>{description}</p>
         <button className={!isFav ? 'button-outline' : ''} onClick={toggleFavHandler}>
           {isFav ? 'Un-Favorite' : 'Favorite'}

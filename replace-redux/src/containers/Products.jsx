@@ -1,15 +1,12 @@
-import { useSelector } from 'react-redux';
-
 import ProductItem from '../components/Products/ProductItem';
 import classes from  './Products.module.css';
-import { useContext } from 'react';
-import { ProductsContext } from '../context/products-context';
+import useStore from '../hooks-store/store';
 
 export default function Products() {
-  const { products } = useContext(ProductsContext);
+  const [ state ] = useStore();
   return (
     <ul className={classes.productsList}>
-      {products.map(prod => (
+      {state.products.map(prod => (
         <ProductItem
           key={prod.id}
           id={prod.id}
