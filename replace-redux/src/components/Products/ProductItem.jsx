@@ -3,7 +3,7 @@ import classes from './ProductItem.module.css';
 import useStore from '../../hooks-store/store';
 
 export default function ProductItem({ id, isFav, title, description }) {
-  const [ _, dispatch ] = useStore();
+  const [ _, dispatch ] = useStore(false);
 
   const toggleFavHandler = () => {
     dispatch('TOGGLE_FAV', id);
