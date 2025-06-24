@@ -1,9 +1,12 @@
+import type { FC } from 'react';
 import Todos from './components/Todos';
 
-export default function App() {
+const App: FC = () => {
   return (
     <div>
-      <Todos />
+      <Todos items={ [ 'Learn React', 'Learn Typescript' ] } />
     </div>
   )
 }
+
+export default App;
