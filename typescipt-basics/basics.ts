@@ -23,3 +23,11 @@ let people: Person[];
 // Union types
 let course: string | number = 'React - The Complete Guide';
 course = 12341;
+
+// Functions
+function add(a: number, b: number): number {
+    return a + b;
+}
+function printOutput(value: any): void {
+    console.log(value)
+}
