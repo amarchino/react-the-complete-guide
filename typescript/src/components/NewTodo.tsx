@@ -1,6 +1,6 @@
 import { useRef, type FC, type FormEvent } from 'react';
 
-const NewTodo: FC = () => {
+const NewTodo: FC<{ onAddTodo: (text: string) => void }> = ({ onAddTodo }) => {
   const todoTextInputRef = useRef<HTMLInputElement>(null);
 
   function submitHandler(event: FormEvent<HTMLFormElement>) {
@@ -9,7 +9,7 @@ const NewTodo: FC = () => {
     if(enteredText.length === 0) {
       return;
     }
-
+    onAddTodo(enteredText);
   }
 
   return (
