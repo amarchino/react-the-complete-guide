@@ -9,11 +9,14 @@ const App: FC = () => {
   function onAddTodo(text: string) {
     setTodos(prevTodos => [ ...prevTodos, new Todo(text) ]);
   }
+  function onRemoveTodo(id: string) {
+    setTodos(prevTodos => prevTodos.filter(todo => todo.id !== id));
+  }
 
   return (
     <div>
-      <NewTodo onAddTodo={onAddTodo} />
-      <Todos items={ todos } />
+      <NewTodo onAddTodo={ onAddTodo } />
+      <Todos items={ todos } onRemoveTodo={ onRemoveTodo } />
     </div>
   )
 }
