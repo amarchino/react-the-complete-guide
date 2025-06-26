@@ -1,7 +1,8 @@
 import type { FC } from 'react';
+import Post from './components/Post';
 
 const App: FC = () => {
-  return <h1>Hello World!</h1>;
+  return <Post />;
 }
 
 export default App;
