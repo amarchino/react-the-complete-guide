@@ -1,10 +1,11 @@
-import type { ChangeEvent, FC } from 'react';
+import { useState, type ChangeEvent, type FC } from 'react';
 import classes from './NewPost.module.css';
 
 const NewPost: FC = () => {
+  const [ enteredBody, setEnteredBody ] = useState('');
 
   function changeBodyHandler(event: ChangeEvent<HTMLTextAreaElement>) {
-    console.log(event.target.value);
+    setEnteredBody(event.target.value);
   }
 
   return (
@@ -13,6 +14,7 @@ const NewPost: FC = () => {
         <label htmlFor="body">Text</label>
         <textarea id="body" required rows={3} onChange={changeBodyHandler} />
       </p>
+      <p>{ enteredBody }</p>
       <p>
         <label htmlFor="name">Your name</label>
         <input type="text" id="name" required />
