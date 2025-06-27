@@ -46,7 +46,7 @@ app.post('/posts', async (req, res) => {
 });
 
 const server = app.listen(8080, () => {
-  console.log('Server running on port 3000');
+  console.log('Server running on port 8080');
   console.log('press q to exit');
 });
 
