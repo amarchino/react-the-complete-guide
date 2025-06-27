@@ -2,10 +2,12 @@ import { useState, type ChangeEvent, type FC, type FormEvent } from 'react';
 import classes from './NewPost.module.css';
 import type { PostDTO } from '../model/PostDTO';
 import Modal from '../components/Modal';
+import { Link, useNavigate } from 'react-router-dom';
 
-const NewPost: FC<{ onCancel: () => void, onAddPost: (post: PostDTO) => void }> = ({ onCancel, onAddPost }) => {
+const NewPost: FC<{ onAddPost: (post: PostDTO) => void }> = ({ onAddPost }) => {
   const [ enteredBody, setEnteredBody ] = useState('');
   const [ enteredAuthor, setEnteredAuthor ] = useState('');
+  const navigate = useNavigate();
   function bodyChangeHandler(event: ChangeEvent<HTMLTextAreaElement>) {
     setEnteredBody(event.target.value);
   }
@@ -20,11 +22,11 @@ const NewPost: FC<{ onCancel: () => void, onAddPost: (post: PostDTO) => void }> 
       author: enteredAuthor
     };
     onAddPost(postData);
-    onCancel();
+    navigate('/')
   }
 
   return (
-    <Modal onClose={onCancel}>
+    <Modal>
       <form className={classes.form} onSubmit={submitHandler}>
         <p>
           <label htmlFor="body">Text</label>
@@ -35,7 +37,7 @@ const NewPost: FC<{ onCancel: () => void, onAddPost: (post: PostDTO) => void }> 
           <input type="text" id="name" required onChange={authorChangeHandler} />
         </p>
         <p className={classes.actions}>
-          <button type="button" onClick={onCancel}>Cancel</button>
+          <Link to="/" type='button'>Cancel</Link>
           <button>Submit</button>
         </p>
       </form>
