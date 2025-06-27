@@ -7,7 +7,17 @@ import type { PostDTO } from '../model/PostDTO';
 
 const PostsList: FC<{ isPosting: boolean, hideModalHandler: () => void }> = ({ isPosting, hideModalHandler }) => {
   const [ posts, setPosts ] = useState<PostDTO[]>([]);
-  function addPostHandler(post: PostDTO) {
+
+  async function addPostHandler(post: PostDTO) {
+    const response = await fetch('http://localhost:8080/posts', {
+      method: 'POST',
+      body: JSON.stringify(post),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const data = await response.json();
+    console.log(data);
     setPosts(prevValue => [ post, ...prevValue ]);
   }
   return (
@@ -18,7 +28,7 @@ const PostsList: FC<{ isPosting: boolean, hideModalHandler: () => void }> = ({ i
         </Modal>
       }
       { posts.length > 0 && <ul className={classes.posts}>
-          { posts.map(post => <Post key={post.body} author={post.author} body={post.body} /> ) }
+          { posts.map(post => <Post key={post.id} author={post.author} body={post.body} /> ) }
         </ul>
       }
       { posts.length === 0 && <div style={{ textAlign: 'center', color: 'white' }}>

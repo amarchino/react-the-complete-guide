@@ -16,7 +16,7 @@ app.use((_, res, next) => {
   // Attach CORS headers
   // Required when using a detached backend (that runs on a different domain)
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,POST');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
@@ -53,6 +53,7 @@ const server = app.listen(8080, () => {
 stdin.on('data', key => {
   const value = key.toString();
   if ( value === '\u0003' || value === 'q' ) {
+    server.close();
     process.exit(0);
   }
 });
