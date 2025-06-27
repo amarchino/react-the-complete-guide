@@ -1,7 +1,8 @@
 import { useState, type ChangeEvent, type FC, type FormEvent } from 'react';
 import classes from './NewPost.module.css';
+import type { PostDTO } from '../model/PostDTO';
 
-const NewPost: FC<{ onCancel: () => void }> = ({ onCancel }) => {
+const NewPost: FC<{ onCancel: () => void, onAddPost: (post: PostDTO) => void }> = ({ onCancel, onAddPost }) => {
   const [ enteredBody, setEnteredBody ] = useState('');
   const [ enteredAuthor, setEnteredAuthor ] = useState('');
   function bodyChangeHandler(event: ChangeEvent<HTMLTextAreaElement>) {
@@ -13,10 +14,11 @@ const NewPost: FC<{ onCancel: () => void }> = ({ onCancel }) => {
 
   function submitHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const postData = {
+    const postData: PostDTO = {
       body: enteredBody,
       author: enteredAuthor
     };
+    onAddPost(postData);
     onCancel();
   }
 

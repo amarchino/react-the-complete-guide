@@ -1,7 +1,8 @@
 import type { FC } from 'react';
 import classes from './Post.module.css';
+import type { PostDTO } from '../model/PostDTO';
 
-const Post: FC<{ author: string, body: string }> = ({ author, body }) => {
+const Post: FC<PostDTO> = ({ author, body }) => {
   return (
     <div className={classes.post}>
       <p className={classes.author}>{ author }</p>
