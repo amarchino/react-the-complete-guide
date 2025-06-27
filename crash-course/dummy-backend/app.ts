@@ -23,7 +23,7 @@ app.use((_, res, next) => {
 
 app.get('/posts', async (_, res) => {
   const storedPosts = await getStoredPosts();
-  // await new Promise((resolve, reject) => setTimeout(() => resolve(), 1500));
+  // await new Promise(resolve => setTimeout(() => resolve(void 0), 1500));
   res.json({ posts: storedPosts });
 });
 
