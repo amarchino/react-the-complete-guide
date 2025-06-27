@@ -1,4 +1,4 @@
-import { useState, type FC } from 'react';
+import { useEffect, useState, type FC } from 'react';
 import Post from './Post';
 import classes from './PostsList.module.css'
 import NewPost from './NewPost';
@@ -7,17 +7,23 @@ import type { PostDTO } from '../model/PostDTO';
 
 const PostsList: FC<{ isPosting: boolean, hideModalHandler: () => void }> = ({ isPosting, hideModalHandler }) => {
   const [ posts, setPosts ] = useState<PostDTO[]>([]);
+  useEffect(() => {
+    handleGetPosts();
+    async function handleGetPosts() {
+      const response = await fetch('http://localhost:8080/posts');
+      const data: { posts: PostDTO[] } = await response.json();
+      setPosts(data.posts);
+    }
+  }, []);
 
   async function addPostHandler(post: PostDTO) {
-    const response = await fetch('http://localhost:8080/posts', {
+    await fetch('http://localhost:8080/posts', {
       method: 'POST',
       body: JSON.stringify(post),
       headers: {
         'Content-Type': 'application/json'
       }
     });
-    const data = await response.json();
-    console.log(data);
     setPosts(prevValue => [ post, ...prevValue ]);
   }
   return (
