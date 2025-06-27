@@ -5,6 +5,7 @@ import NewPost from './NewPost';
 import Modal from './Modal';
 
 const PostsList: FC = () => {
+  const [ modalIsVisible, setModalIsVisible ] = useState(true);
   const [ enteredBody, setEnteredBody ] = useState('');
   const [ enteredAuthor, setEnteredAuthor ] = useState('');
   function bodyChangeHandler(event: ChangeEvent<HTMLTextAreaElement>) {
@@ -13,12 +14,17 @@ const PostsList: FC = () => {
   function authorChangeHandler(event: ChangeEvent<HTMLInputElement>) {
     setEnteredAuthor(event.target.value);
   }
+  function hideModalHandler() {
+    setModalIsVisible(false)
+  }
 
   return (
     <>
-      <Modal>
-        <NewPost onBodyChange={bodyChangeHandler} onAuthorChange={authorChangeHandler} />
-      </Modal>
+      { modalIsVisible &&
+        <Modal onClose={hideModalHandler}>
+          <NewPost onBodyChange={bodyChangeHandler} onAuthorChange={authorChangeHandler} />
+        </Modal>
+      }
       <ul className={classes.posts}>
         <Post author={enteredAuthor} body={ enteredBody } />
         <Post author='Manuel' body='Check out the full course!' />
