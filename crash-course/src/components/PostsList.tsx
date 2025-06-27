@@ -1,11 +1,9 @@
 import { useEffect, useState, type FC } from 'react';
 import Post from './Post';
 import classes from './PostsList.module.css'
-import NewPost from './NewPost';
-import Modal from './Modal';
 import type { PostDTO } from '../model/PostDTO';
 
-const PostsList: FC<{ isPosting: boolean, hideModalHandler: () => void }> = ({ isPosting, hideModalHandler }) => {
+const PostsList: FC = () => {
   const [ posts, setPosts ] = useState<PostDTO[]>([]);
   const [ isFetching, setIsFetching ] = useState(false);
   useEffect(() => {
@@ -31,11 +29,6 @@ const PostsList: FC<{ isPosting: boolean, hideModalHandler: () => void }> = ({ i
   }
   return (
     <>
-      { isPosting &&
-        <Modal onClose={hideModalHandler}>
-          <NewPost onCancel={hideModalHandler} onAddPost={addPostHandler} />
-        </Modal>
-      }
       { !isFetching && posts.length > 0 && <ul className={classes.posts}>
           { posts.map(post => <Post key={post.id} author={post.author} body={post.body} /> ) }
         </ul>
