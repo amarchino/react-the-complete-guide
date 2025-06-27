@@ -12,12 +12,11 @@ const App: FC = () => {
     setModalIsVisible(false)
   }
 
-  return <>
-    <MainHeader onCreatePost={showModalHandler} />
+  return (
     <main>
       <PostsList isPosting={modalIsVisible} hideModalHandler={hideModalHandler} />
     </main>
-  </>;
+  );
 }
 
 export default App;
