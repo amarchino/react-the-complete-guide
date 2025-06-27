@@ -9,7 +9,7 @@ const PostsList: FC = () => {
   return (
     <>
       { posts.length > 0 && <ul className={classes.posts}>
-          { posts.map(post => <Post key={post.id} author={post.author} body={post.body} /> ) }
+          { posts.map(post => <Post key={post.id} author={post.author} body={post.body} id={post.id} /> ) }
         </ul>
       }
       { posts.length === 0 && <div style={{ textAlign: 'center', color: 'white' }}>
