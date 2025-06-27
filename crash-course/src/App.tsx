@@ -1,10 +1,23 @@
-import type { FC } from 'react';
+import { useState, type FC } from 'react';
 import PostsList from './components/PostsList';
+import MainHeader from './components/MainHeader';
 
 const App: FC = () => {
-  return <main>
-    <PostsList />
-  </main>;
+  const [ modalIsVisible, setModalIsVisible ] = useState(false);
+
+  function showModalHandler() {
+    setModalIsVisible(true)
+  }
+  function hideModalHandler() {
+    setModalIsVisible(false)
+  }
+
+  return <>
+    <MainHeader onCreatePost={showModalHandler} />
+    <main>
+      <PostsList isPosting={modalIsVisible} hideModalHandler={hideModalHandler} />
+    </main>
+  </>;
 }
 
 export default App;
