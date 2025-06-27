@@ -6,17 +6,6 @@ import { useLoaderData } from 'react-router-dom';
 
 const PostsList: FC = () => {
   const posts = useLoaderData<PostDTO[]>();
-
-  // async function addPostHandler(post: PostDTO) {
-  //   await fetch('http://localhost:8080/posts', {
-  //     method: 'POST',
-  //     body: JSON.stringify(post),
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     }
-  //   });
-  //   setPosts(prevValue => [ post, ...prevValue ]);
-  // }
   return (
     <>
       { posts.length > 0 && <ul className={classes.posts}>
