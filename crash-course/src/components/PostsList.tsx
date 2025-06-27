@@ -18,7 +18,7 @@ const PostsList: FC<{ isPosting: boolean, hideModalHandler: () => void }> = ({ i
     <>
       { isPosting &&
         <Modal onClose={hideModalHandler}>
-          <NewPost onBodyChange={bodyChangeHandler} onAuthorChange={authorChangeHandler} />
+          <NewPost onBodyChange={bodyChangeHandler} onAuthorChange={authorChangeHandler} onCancel={hideModalHandler} />
         </Modal>
       }
       <ul className={classes.posts}>
